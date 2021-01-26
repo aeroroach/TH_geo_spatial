@@ -12,9 +12,10 @@ th %>%
 
 # For loop -----------------------------------------------------------
 
-source("map_fn.R")
+source("fn/map_fn.R")
 
 region_list <- distinct(gs, region)
+region_list <- region_list$region
 
 for (i in region_list) {
   
