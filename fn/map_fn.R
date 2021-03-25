@@ -17,3 +17,19 @@ mapping_region <- function(dt_file, region_fliter) {
               legend.position = c("LEFT", "BOTTOM"))
 
 }
+
+mapping_all <- function(dt_file) {
+  dt_file %>% 
+    mutate(prop = round(prop*100, digits = 1), 
+           province = paste0(Adm1Name, ", (", prop, "%)")) %>% 
+    tm_shape() + tm_polygons(col = "prop", title = "% of GS batt",
+                             lwd = 0.5, 
+                             textNA = "None",
+                             colorNA = "grey94",
+                             border.col = "black", palette = "Blues") +
+    tm_text("prop", size = "AREA", col = "black") +
+    tm_layout(frame = F,
+              outer.margins = 0, 
+              legend.show = F)
+  
+}

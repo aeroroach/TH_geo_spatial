@@ -10,9 +10,9 @@ gs <- read_csv("GS sales by province.csv")
 th %>% 
   left_join(gs, by = c("Adm1Name"="province")) -> th_dealer
 
-# For loop -----------------------------------------------------------
-
 source("fn/map_fn.R")
+
+# For loop -----------------------------------------------------------
 
 region_list <- distinct(gs, region)
 region_list <- region_list$region
@@ -24,3 +24,8 @@ for (i in region_list) {
   tmap_save(p, paste0("output/", i,".pdf"))
   
 }
+
+# All map -----------------------------------------------------------------
+
+p <- mapping_all(th_dealer)
+tmap_save(p, "output/th_all.pdf")
